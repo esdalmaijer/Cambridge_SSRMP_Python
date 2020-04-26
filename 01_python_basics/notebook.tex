@@ -1,0 +1,1468 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{python\_basics}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Python Basics}\label{python-basics}
+
+This worksheet will cover the basics of Python: types of values,
+variables, statements, functions, and classes. First, let's get some
+jargon out of the way.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{value type}: Programming languages can recognise several
+  specific value types, including numbers and text. We'll go through all
+  important types in this worksheet.
+\item
+  \textbf{variable}: A variable has a name, and is linked to a value.
+  It's a way of keeping track of specific values in memory. For example,
+  you could say \texttt{a\ =\ 3}. The value \texttt{3} is now linked to
+  the variable \texttt{a}. You can refer to \texttt{a} later in your
+  script.
+\item
+  \textbf{statement}: There are several types of statements. They are
+  the building blocks of a programming language, and allow you to
+  repeatedly run small pockets of code, or to run a bit of code only if
+  a certain condition is met.
+\item
+  \textbf{function}: A function is a defined collection of code. It
+  usually takes some input, processes this, and then returns some
+  output. For example, the function \texttt{sum} takes as input a
+  collection of numbers, adds them all together, and then returns the
+  sum. Functions can be short and simple, or long and complex, and
+  anything in between. Some functions are built into Python, some are
+  inlcuded in external packages, and you can also write your own.
+\item
+  \textbf{class}: A class is a collection of variables and functions,
+  all linked to the same \textbf{instance}. For example, you can think
+  of a car as an \emph{instance}: It has its own properties (like its
+  top speed), and its own functions (like driving). The blueprint for a
+  car is more like a \emph{class}: It describes how a car should be
+  built, for example with four wheels. Even when produced with the same
+  blueprint (class), cars (instances) can be different from each other.
+  For example, they could have different wheels, or a different colour.
+\end{itemize}
+
+If these descriptions seem a bit unclear still, don't worry: We're going
+to go through them in more detail in this worksheet.
+
+    \subsection{Numbers}\label{numbers}
+
+Numbers come in two formats: integers and floats. \textbf{Integers} are
+whole, undivided numbers like -2, 0, and 15. \textbf{Floats} (floating
+point) numbers are fractions, for example 3.1, 5.43, and
+0.6666666666666667.
+
+    \subsubsection{Integers}\label{integers}
+
+You can use integers in basic operations like addition, subtraction,
+multiplication, and division:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} 2
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{l+m+mi}{5} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 2
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{l+m+mi}{900}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} -890
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{l+m+mi}{2} \PY{o}{*} \PY{l+m+mi}{10}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 20
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{l+m+mi}{10} \PY{o}{/} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 2
+\end{Verbatim}
+            
+    Let's try allocating an integer to a \textbf{variable}, and do
+operations with that:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{a} \PY{o}{*} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} 6
+\end{Verbatim}
+            
+    \subsubsection{Floats}\label{floats}
+
+Floats can also be used in basic operations:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{l+m+mf}{0.5} \PY{o}{+} \PY{l+m+mf}{0.1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0.6
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{l+m+mf}{1.5} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 1.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{l+m+mf}{5.0} \PY{o}{*} \PY{l+m+mf}{0.25}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 1.25
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{l+m+mf}{1.25} \PY{o}{/} \PY{l+m+mf}{5.0}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 0.25
+\end{Verbatim}
+            
+    You can do the same by assigning floats to variables:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{3.0}
+         \PY{n}{a} \PY{o}{*} \PY{n}{b}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 1.5
+\end{Verbatim}
+            
+    \subsubsection{Operations}\label{operations}
+
+Aside from the basic addition (\texttt{+}), subtraction (\texttt{-}),
+multiplication (\texttt{*}), and division (\texttt{\textbackslash{}}),
+there are also operators to do exponentiation (\texttt{**}), integer
+division (\texttt{\textbackslash{}\textbackslash{}}), and to compute the
+remainder after division (\texttt{\%}). Let's see them in action:
+
+    \paragraph{Exponentiation}\label{exponentiation}
+
+Three square (\(3^2\)) and two to the power of eight (\(2^8\)):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{l+m+mi}{3}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 9
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{8}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 256
+\end{Verbatim}
+            
+    \paragraph{Division (integer and
+remainder)}\label{division-integer-and-remainder}
+
+The result of a division can be a fraction, which can be expressed as a
+float. However, sometimes it can be useful to know the result as an
+integer and the remainder. For example, the outcome of five divided by
+two is 2.5, but can also be expressed as 2 with a remainder of 1. In
+Python, you can compute these as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{l+m+mi}{5} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 2
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{l+m+mi}{5} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 1
+\end{Verbatim}
+            
+    \subsubsection{Should I be aware of the difference between int and
+float?}\label{should-i-be-aware-of-the-difference-between-int-and-float}
+
+Previously, divisions of two integers ignored the remainder. So
+\texttt{5/2} would be the same as \texttt{5//2}, both resulting in
+\texttt{2}. In Python 3 (the newest version), this is no longer the
+case: \texttt{5/2} should result in \texttt{2.5}. While this is an
+intuitive result to humans, many programming languages are more fussy
+about variable types. That an operation involving two integers results
+in a float could thus be considered a bit weird.
+
+As a human, you might be relieved that Python's behaviour maps onto your
+own, rather than on a more rigid interpretation of what numbers are.
+There are people who argue that this means you don't have to play
+attention to the distinction between integers and floats.
+
+Those people are wrong. At some point, you'll encounter functions that
+require integers, and can't deal with floats. This is important if
+you're dealing with undivisible quantities, like pixels: there's no such
+thing as half a pixel.
+
+That means that while \texttt{5} and \texttt{3} are both OK pixel
+values, \texttt{5/3} is NOT. This is easy to spot with numerical values,
+but less so if you can only see variable names \texttt{a/b}.
+
+    \subsection{Text strings}\label{text-strings}
+
+Python can also deal with text values, in the form of the
+\textbf{string} type. Strings are denoted by single
+(\texttt{\textquotesingle{}}) or double (\texttt{"}) quotes, or even
+three quotes
+(\texttt{\textquotesingle{}\textquotesingle{}\textquotesingle{}} or
+\texttt{"""}). Par example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a string}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 'This is a string'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{This is also a string}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 'This is also a string'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This is a single string too\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 'This is a single string too'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}This is not a string. Jokes, this totally is a string!\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 'This is not a string. Jokes, this totally is a string!'
+\end{Verbatim}
+            
+    Strings can also be empty:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} ''
+\end{Verbatim}
+            
+    You can combine strings using the \texttt{+} operator:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Strings can be}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ combined!}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 'Strings can be combined!'
+\end{Verbatim}
+            
+    And you can even use the \texttt{*} operator to multiply a string!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cool,}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+m+mi}{3} \PY{o}{*} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ cool}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 'Cool, cool cool cool'
+\end{Verbatim}
+            
+    \subsubsection{Introducing print}\label{introducing-print}
+
+At this point, it might be good to learn about the \texttt{print}
+function. We'll get to functions n more detail later, but this one is
+good to known about in the context of strings. When running a script,
+output is not usually produced \emph{unless you specifically request
+it}. The \texttt{print} function is a way to make this happen.
+
+For example, if you assign a value to variable \texttt{ghost} (either in
+a console or in a Jupyter Notebook), you don't get any visible feedback:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{ghost} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{man wearing a sheet}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    Let's use print to shine some light on what \texttt{ghost} is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{print}\PY{p}{(}\PY{n}{ghost}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+man wearing a sheet
+
+    \end{Verbatim}
+
+    The \texttt{print} function can be used on any variable, not just on
+strings. It can be useful in scripts to check the value of a particular
+variable, or to give you periodic updates of what is happening.
+
+    \subsubsection{String formatting}\label{string-formatting}
+
+Strings come with their own formatting options. Specifically, you can
+use \texttt{\{\}} as a placeholder for a value that you might want to
+add later. An example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{s} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I am \PYZob{}\PYZcb{} years old}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    To assign a value to the wildcard, you can use the sting's
+\texttt{format} method:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{print}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{twenty}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+I am \{\} years old
+I am 42 years old
+I am twenty years old
+I am 2.5 years old
+
+    \end{Verbatim}
+
+    \subsection{Collections}\label{collections}
+
+So far you've only seen single values, whether numbers or texts.
+(Although strictly speaking a string could be considered a collection of
+single characters!) There are also variable types that allow you to
+combine those.
+
+A \textbf{tuple} is a collection of values:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    You can get at specific values in a list by using their \textbf{index}.
+For this, Python starts counting at 0. So, it you would like to get at
+the first value, you would use \texttt{a{[}0{]}}. The second value is at
+\texttt{a{[}1{]}}, and so on:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+2
+3
+
+    \end{Verbatim}
+
+    Tuples cannot be altered (they can be completely overwriten)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-29-fa1ba3f7cc8f> in <module>()
+    ----> 1 a[0] = 2
+    
+
+        TypeError: 'tuple' object does not support item assignment
+
+    \end{Verbatim}
+
+    An alternative that CAN be altered is the \textbf{list}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    You can index lists in the same way as tuples:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+2
+3
+
+    \end{Verbatim}
+
+    You can alter any value in a list directly:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{5}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[6, 2, 3]
+
+    \end{Verbatim}
+
+    Altering the entire list at once is NOT possible:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{a} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-34-460e7a5471e1> in <module>()
+    ----> 1 a = a + 5
+    
+
+        TypeError: can only concatenate list (not "int") to list
+
+    \end{Verbatim}
+
+    \subsection{For loops}\label{for-loops}
+
+If you do want to change all values in a list, you can do so one by one.
+(In the example below, the \texttt{+=} operator is used. This means "add
+to this variable". That means that \texttt{a\ =\ a\ +\ 5} is the same as
+\texttt{a\ +=\ 5})
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+         
+         \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    For three values, this is still doable. But if your list has hundreds of
+values, having to type hundreds of additional lines would take FOR EVER!
+This is where loops come in!
+
+You can use a \textbf{for loop} to cycle through all values in a
+collection:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{for} \PY{n}{value} \PY{o+ow}{in} \PY{n}{a}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{n}{value}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6
+7
+8
+
+    \end{Verbatim}
+
+    To be able to change the entire \texttt{a} list, you would need to be
+able to get all indices. There is a function that can do this! It's
+called \texttt{range}, and it provides a list with values from a
+starting point and an ending point. Here, the starting point should be 0
+(the first index), and the ending point should be the length of the
+list. The length of the list can be computed with the \texttt{len}
+function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{start} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{end} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n}{indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{end}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{indices}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0, 1, 2]
+
+    \end{Verbatim}
+
+    Now that you know how to get the indices, you can use them to index all
+values in \texttt{a} in a single for loop:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6
+7
+8
+
+    \end{Verbatim}
+
+    Instead of printing all values in \texttt{a}, our plan was to change all
+values in \texttt{a}. So let's do that with our newfound ability to loop
+through all values in the list:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[6, 7, 8]
+[11, 12, 13]
+
+    \end{Verbatim}
+
+    \subsection{Booleans and logic}\label{booleans-and-logic}
+
+A \emph{Boolean} is a variable that can only be one of two things:
+\texttt{True} or \texttt{False}, which is equivalent to \texttt{1} or
+\texttt{0}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{a} \PY{o}{=} \PY{n+nb+bp}{True}
+         \PY{n}{b} \PY{o}{=} \PY{n+nb+bp}{False}
+\end{Verbatim}
+
+
+    The fact that Booleans are really \texttt{0} and \texttt{1} can lead to
+odd behaviour, for example when you multiple True with any number:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{print}\PY{p}{(}\PY{l+m+mi}{3} \PY{o}{*} \PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3
+-1
+
+    \end{Verbatim}
+
+    If you want to combine Booleans in a more sensible way, you can use
+\emph{logical operators}. These include \texttt{and}, \texttt{or}, and
+\texttt{not}.
+
+The \texttt{and} operator only returns \texttt{True} if ALL conditions
+are \texttt{True}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o+ow}{and} \PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o+ow}{and} \PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{False} \PY{o+ow}{and} \PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+False
+False
+
+    \end{Verbatim}
+
+    The \texttt{or} operator returns \texttt{True} if ANY conditions are
+`True:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o+ow}{or} \PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o+ow}{or} \PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{False} \PY{o+ow}{or} \PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+True
+False
+
+    \end{Verbatim}
+
+    The \texttt{not} operator can reverse a Boolean:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k}{print}\PY{p}{(}\PY{o+ow}{not} \PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{o+ow}{not} \PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+False
+True
+
+    \end{Verbatim}
+
+    \subsubsection{Comparisons}\label{comparisons}
+
+Booleans can be the result of comparisons. You can check whether any two
+variables are the same by using the \texttt{==} operator:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{print}\PY{p}{(}\PY{l+m+mi}{3} \PY{o}{==} \PY{l+m+mi}{5}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{==} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+False
+True
+False
+
+    \end{Verbatim}
+
+    Other comparisons are "smaller than" (\texttt{\textless{}}), "greater
+than" (\texttt{\textgreater{}}), "smaller than or equal to"
+(\texttt{\textless{}=}), "greater than or equal to"
+(\texttt{\textgreater{}=}), and "does not equal" (\texttt{!=}).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k}{print}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{3} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{8} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+True
+True
+
+    \end{Verbatim}
+
+    The \texttt{and} operator can also be written as \texttt{\&}, and the
+\texttt{or} operator can be written as \texttt{\textbar{}}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o+ow}{and} \PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o}{\PYZam{}} \PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o+ow}{or} \PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n+nb+bp}{True} \PY{o}{|} \PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+False
+False
+True
+True
+
+    \end{Verbatim}
+
+    \subsubsection{If statements}\label{if-statements}
+
+Booleans can be used in logic statements. One of these is the
+\texttt{if} statement, which can be used to run specific lines of code
+depending on a situation. For example, you might want to check if a
+value is even. An even value is divisible by two without a remainder.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{4}
+         
+         \PY{k}{if} \PY{n}{a} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is even!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This value is even!
+
+    \end{Verbatim}
+
+    You can add alternative options to your if statement using \texttt{elif}
+(short for "else if"). In this case, you could check if a value is odd,
+meaning it will leave a remainder of 1 after being divided by two.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{5}
+         
+         \PY{k}{if} \PY{n}{a} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is even!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{a} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is odd!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This value is odd!
+
+    \end{Verbatim}
+
+    In this case, the if statement covers all options, provided the variable
+\texttt{a} points to an integer. In cases where there are more options,
+you can add as many \texttt{elif} statements as you would like.
+
+In addition to \texttt{if} and \texttt{elif}, there is a "catch-all"
+type of statement too. You can use this to cover any options that hadn't
+yet been covered in your \texttt{if}s and \texttt{elif}s:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{a} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{k}{if} \PY{n}{a} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is negative.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is positive.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value must be 0!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This value is positive.
+
+    \end{Verbatim}
+
+    The above statement first checks if a value is below zero, then if it's
+above 0, and finally concludes that if the value was neither below nor
+above zero, it must be zero!
+
+You might have noticed that it is assumed that \texttt{a} points to a
+numerical value. You could try to make it a string or a Boolean, and see
+what happens. Seriously, try it! You might find that a string is
+misrecognised as a positive value, that \texttt{True} is also a positive
+value, and that \texttt{False} is zero.
+
+One way to avoid this mess, is to check whether \texttt{a} is actually a
+number. Checking a variable's type can be done with the \texttt{type}
+function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{5}
+         
+         \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{==} \PY{n+nb}{int} \PY{o+ow}{or} \PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{==} \PY{n+nb}{float}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a number!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is not a number...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This is a number!
+
+    \end{Verbatim}
+
+    \subsubsection{Nesting and indentation}\label{nesting-and-indentation}
+
+As you might have noticed, the if statements are followed by lines of
+code that are \textbf{indented}: They are four spaces ahead of the
+previous line. These four spaces are how Python know what should be run
+by the if statement.
+
+You can use this to \textbf{nest} if statements: Write one statement
+within another. Let's try this by combining the previous examples:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{5}
+         
+         \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{==} \PY{n+nb}{int} \PY{o+ow}{or} \PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{==} \PY{n+nb}{float}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is a number!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{a} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is negative.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value is positive.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This value must be 0!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is not a number...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This is a number!
+This value is positive.
+
+    \end{Verbatim}
+
+    \subsection{Functions}\label{functions}
+
+You already encountered four functions from basic Python:
+\texttt{print}, \texttt{type}, \texttt{len}, and \texttt{range}. You can
+also create your own! For example, you could take rewrite previous bit
+of code as a function.
+
+Function's require three things: a name (duh!), inputs, and outputs.
+Here, your function name could be \texttt{pos\_or\_neg}, because the
+code determines whether a value is positive, negative, or 0. The input
+is a numerical value (\texttt{number}, and the output is a string
+(\texttt{output}).
+
+In Python, you can write this using \texttt{def}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k}{def} \PY{n+nf}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{number} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neg}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{elif} \PY{n}{number} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pos}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    We can now use this function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+None
+None
+
+    \end{Verbatim}
+
+    OK, so you didn't actually see any output. Maybe it helps if you try
+printing the \texttt{output} variable directly?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k}{print}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-55-a707e9187d7c> in <module>()
+    ----> 1 print(output)
+    
+
+        NameError: name 'output' is not defined
+
+    \end{Verbatim}
+
+    Oh, no! An error!
+
+The variable \texttt{output} is \textbf{local} to the function. It
+exists within the function, but cannot be accessed outside of the
+function. OOPS!
+
+To make the output available outside of the function, it needs to be
+\textbf{returned}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k}{def} \PY{n+nf}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{number} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neg}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{elif} \PY{n}{number} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pos}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{return} \PY{n}{output}
+\end{Verbatim}
+
+
+    Let's try it now:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+pos
+neg
+0
+
+    \end{Verbatim}
+
+    We currently assume that the \texttt{number} variable passed by whoever
+uses the function is in fact a number. However, you can just as easily
+pass something else, and end up in trouble:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{minus twelve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+pos
+pos
+
+    \end{Verbatim}
+
+    The same solution as before applies here too: You need to check whether
+the passed input value is actually a number. Only if it is a number, you
+can return something sensible. If it is not a number, you can pass
+\texttt{None}. This is a special variable type that basically is
+nothing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{k}{def} \PY{n+nf}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{number}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb}{int} \PY{o+ow}{or} \PY{n+nb}{type}\PY{p}{(}\PY{n}{number}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb}{float}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{number} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neg}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{k}{elif} \PY{n}{number} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pos}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{n+nb+bp}{None}
+             \PY{k}{return} \PY{n}{output}
+\end{Verbatim}
+
+
+    Let's try!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+pos
+0
+neg
+None
+None
+None
+
+    \end{Verbatim}
+
+    \subsection{Comments}\label{comments}
+
+So far, you've only seen code that is runable. You could read it, but
+the main purpose was for the computer to read it. In addition to this,
+there is also code that is \emph{not} intended for the computer. This is
+text that you add to your scripts specifically for humans who read the
+code. These can be notes to yourself, or to anyone else who might have
+to work with your code.
+
+Comments are super useful. You might not appreciate this right now, but
+human memory is fallible. Code that you read or wrote and understand
+now, is going to be completely unintelligible in a few weeks time.
+(Sometimes I don't even understand what I did before lunch...) Comments
+allow you to explain what each part of your code does.
+
+Let's add some comments to the function you wrote above. Comments are
+preceded by the pound sign (\texttt{\#}), and Python will ignore them:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} Function definitions start with `def`, and require}
+         \PY{c+c1}{\PYZsh{} that the input is specified between brackets. Here,}
+         \PY{c+c1}{\PYZsh{} `number` is the input.}
+         \PY{k}{def} \PY{n+nf}{pos\PYZus{}or\PYZus{}neg}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} We can\PYZsq{}t assume that the passed value for `number`}
+             \PY{c+c1}{\PYZsh{} is in fact a number. Whether it is should thus be}
+             \PY{c+c1}{\PYZsh{} tested. The `type` function returns the type of}
+             \PY{c+c1}{\PYZsh{} the passed variable. Numbers can be of type `int`}
+             \PY{c+c1}{\PYZsh{} or `float`.}
+             \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{number}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb}{int} \PY{o+ow}{or} \PY{n+nb}{type}\PY{p}{(}\PY{n}{number}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb}{float}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} All numbers below 0 are negative.}
+                 \PY{k}{if} \PY{n}{number} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neg}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{c+c1}{\PYZsh{} All numbers above zero are positive.}
+                 \PY{k}{elif} \PY{n}{number} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pos}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{c+c1}{\PYZsh{} This else statement should only be run if the}
+                 \PY{c+c1}{\PYZsh{} value was not below 0, but also not above 0.}
+                 \PY{c+c1}{\PYZsh{} The only number for which this is true is 0.}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{output} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} This else statement is run if the first if}
+             \PY{c+c1}{\PYZsh{} statement isn\PYZsq{}t True. This only hapens if the}
+             \PY{c+c1}{\PYZsh{} passed value for `number` was not an int or a}
+             \PY{c+c1}{\PYZsh{} float. In these cases, `None` should be returned.}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{output} \PY{o}{=} \PY{n+nb+bp}{None}
+             \PY{c+c1}{\PYZsh{} The return statement makes sure that the output is}
+             \PY{c+c1}{\PYZsh{} available outside of this function. This means}
+             \PY{c+c1}{\PYZsh{} that the function can be called like this: }
+             \PY{c+c1}{\PYZsh{} `out = pos\PYZus{}or\PYZus{}neg(5)`}
+             \PY{k}{return} \PY{n}{output}
+\end{Verbatim}
+
+
+    There is no such thing as \emph{too} elaborate commenting. One general
+guideline is that the ratio of comments to code should be about 2:1.
+That means two-thirds of your script would be non-functional comments.
+(It is very rare to actually see this in practice, but it's much less
+rare to curse code that is under-commented!)
+
+    \section{Modules that extend Python}\label{modules-that-extend-python}
+
+All of the above is available in Python without having to do anything.
+However, there are also functions that are tucked away in modules. Basic
+Python comes with a lot of these, each adding specific functionality.
+This includes, for example, the \texttt{math} module for mathematical
+operations (think \texttt{sin}, \texttt{cos}, \texttt{tan}, etc.), the
+\texttt{os} module for things relating to the operating system,
+\texttt{multiprocessing} and \texttt{threading} for parallel computing
+needs, and MANY more.
+
+These modules offer quite specific functionality, so there's a good
+chance you won't need them. To avoid any confusion or accidental
+overwriting of function/variable names, the additional modules are thus
+not loaded by default. Instead, you need to load them explicitly.
+
+For example, say that you wanted to use the number \(\pi\) in your
+script. It's a part of the \texttt{math} module, which you have to load
+before using it:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3.14159265359
+
+    \end{Verbatim}
+
+    \subsection{NumPy}\label{numpy}
+
+In addition to the built-in modules, there exist \emph{many} external
+packages that offer even more functionality. One of the most important
+ones is \textbf{NumPy}, short for numeric Python. This package is a
+crucial tool for many people, and basically unmissable to scientists.
+
+One of the cool elements of NumPy is the \texttt{array}. This is a
+variable type that can represent vectors or matrices of values, usually
+numerical value. (But they can also be strings, or any other variable
+type.) One of the main advantages of the NumPy array is that you can use
+arithmetic operations on the whole array. This is unlike the
+\texttt{list}, which had to be looped through. Side-by-side comparison:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+         
+         \PY{c+c1}{\PYZsh{} Change all values in a list:}
+         \PY{n}{l} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{l}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+         \PY{k}{print}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Change all values in a NumPy array:}
+         \PY{n}{a} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+         \PY{n}{a} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[6, 7, 8]
+[6 7 8]
+
+    \end{Verbatim}
+
+    Arithmetic isn't the only thing you can do with a whole array. You can
+also compare all values in the whole array at the same time against a
+single value, or you can compare all values in one array against all
+values in an array of the same shape:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{a} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{a} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a} \PY{o}{==} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[False  True False False]
+[False  True False  True]
+
+    \end{Verbatim}
+
+    The results of these comparisons are \textbf{Boolean arrays}. You can
+combine these in the same way as single Booleans:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{a} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n+nb+bp}{False}\PY{p}{,} \PY{n+nb+bp}{True}\PY{p}{,} \PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n+nb+bp}{True}\PY{p}{,} \PY{n+nb+bp}{False}\PY{p}{,} \PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{a} \PY{o}{|} \PY{n}{b}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a} \PY{o}{\PYZam{}} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ True  True  True False]
+[ True False False False]
+
+    \end{Verbatim}
+
+    NumPy is full of useful functions, and you will be seeing a lot more of
+it today!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
