@@ -1,4 +1,4 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/esdalmaijer/Cambridge_SSRMP_Python/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/esdalmaijer/Cambridge_SSRMP_python/master)
 
 What is this?
 =============
@@ -34,7 +34,7 @@ A few Jupyter Notebooks have been prepared for you. These are worksheets that wi
 I would like to run Python worksheets in my browser
 ---------------------------------------------------
 
-Follow [this link](https://mybinder.org/v2/gh/esdalmaijer/esdalmaijer/Cambridge_SSRMP_python/master) to get started!
+Follow [this link](https://mybinder.org/v2/gh/esdalmaijer/Cambridge_SSRMP_python/master) to get started!
 
 
 I would like to install Python on my computer
