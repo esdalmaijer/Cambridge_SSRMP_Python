@@ -47,23 +47,13 @@ The aforementioned packages do not come with a basic installation of Python. How
 Make sure you download the **Python 3.7 version**.
 
 
-Introduction to Python
-======================
+Worksheets
+==========
 
-These are materials for the Introduction to Python for staff and grad students at the University of Canterbury (Christchurch, New Zealand). The sessions are hands-on workshops, and the materials we generated in them can be found here so that you can review them afterwards.
-
-In addition, you can find interactive and static versions of the data handling sessions here. These can be used from home, for example if you are trying to socially isolate in response to COVID-19. (And also to review the materials at your own convenience if you were at the workshop.)
-
-You can view static versions here, or walk through interactive versions via [mybinder.org](https://mybinder.org/v2/gh/esdalmaijer/esdalmaijer/Cambridge_SSRMP_python/master). The latter is highly recommended!
-
-Sessions
---------
-
-1. **Introduction to Python.** This did not come with a notebook.
-2. [**Experiment building**](01_experiment) This did not come with a notebook.
-3. [**Data handling**](02_basic_data_handling/canterbury_python_data_analysis.ipynb)
-4. [**Model fitting**](03_model_fitting/canterbury_python_model_fitting.ipynb)
-
+1. [**Introduction to the environments**](00_welcome_to_anaconda/welcome_to_python.ipynb) Introduction to Jupyter Notebooks and Anaconda.
+2. [**Python basics**](01_python_basics/python_basics.ipynb) Variables, programming logic, and functions.
+3. [**Data handling**](02_data_handling/data_handling.ipynb) Data processing, visualisation, and statistics.
+4. [**Model fitting**](03_model_fitting/model_fitting.ipynb) Linear regression and non-linear model fitting.
 
 
 
